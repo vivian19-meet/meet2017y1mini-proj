@@ -216,5 +216,5 @@ for this_food_pos in food_pos :
     food_ID = food.stamp()
 
     food_stamps.append(food_ID)
-if (stamp_list[1])_pos=stamp_list[4]
+if (stamp_list[1])_pos=stamp_list[4]_pos
     quit()
