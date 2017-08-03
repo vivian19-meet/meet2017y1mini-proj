@@ -109,6 +109,10 @@ def make_food():
     ## position
     food_x = random.randint(min_x,max_x)*SQUARE_SIZE
     food_y = random.randint(min_y,max_y)*SQUARE_SIZE
+
+    while (food_x,food_y) in pos_list:
+        food_x = random.randint(min_x,max_x)*SQUARE_SIZE
+        food_y = random.randint(min_y,max_y)*SQUARE_SIZE
     food.goto(food_x,food_y)
     new_food=(food_x,food_y)
     food_pos.append(new_food)
@@ -131,11 +135,13 @@ def move_snake():
         print('You moved left!')
     elif direction== UP:
         snake.goto(x_pos, y_pos + SQUARE_SIZE)
-        print('You moved up!')
+        print('You move up!')
     elif direction == DOWN:
         snake.goto(x_pos, y_pos - SQUARE_SIZE)
         print('You moved down!')
-    
+    if snake.pos() in pos_list[0:-1]:
+        quit()
+
 #4. Write the conditions for UP and DOWN on your own
 ##### YOUR CODE HERE
 #Stamp new element and append new stamp in list
@@ -164,9 +170,10 @@ def move_snake():
 
 #pop zeroth element in pos_list to get rid of last the last
 #piece of the tail
-    old_stamp = stamp_list.pop(0)
-    snake.clearstamp(old_stamp)
-    pos_list.pop(0)
+    else:    
+        old_stamp = stamp_list.pop(0)
+        snake.clearstamp(old_stamp)
+        pos_list.pop(0)
     
 #Now go add code to the end of your move_snake() function
 
@@ -190,7 +197,7 @@ def move_snake():
         quit()
     if new_y_pos >= UP_EDGE:
         print('You hit the top edge! Game over!')
-        #quit()
+        quit()
     turtle.ontimer(move_snake,TIME_STEP)
 move_snake()
 turtle.register_shape("trash.gif") #Add trash picture
@@ -214,7 +221,16 @@ for this_food_pos in food_pos :
 
     food.goto(this_food_pos)
     food_ID = food.stamp()
-
     food_stamps.append(food_ID)
-if (stamp_list[1])_pos=stamp_list[4]_pos
-    quit()
+   
+
+
+
+
+
+
+
+
+
+
+    
