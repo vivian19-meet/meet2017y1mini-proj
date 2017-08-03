@@ -1,11 +1,14 @@
 
 import turtle
 import random #We'll need this later in the lab
+import time
 turtle.tracer(1,0) #This helps the turtle move more smoothly
 SIZE_X=800
 SIZE_Y=500
 turtle.setup(SIZE_X, SIZE_Y) #Curious? It's the turtle window
 #size.
+
+
 turtle.penup()
 SQUARE_SIZE = 20
 START_LENGTH = 8
@@ -55,10 +58,10 @@ LEFT=2
 RIGHT=3
 direction = UP
 #Go to the top of your file, and after the line that says direction = UP, write:
-UP_EDGE = 250
-DOWN_EDGE = -250
-RIGHT_EDGE = 400
-LEFT_EDGE = -400
+UP_EDGE = 1000
+DOWN_EDGE = -1000
+RIGHT_EDGE = 1000
+LEFT_EDGE = -1000
 def up():
     global direction #snake direction is global (same everywhere)
     direction=UP #Change direction to up
@@ -99,8 +102,8 @@ def make_food():
     #So we cut up the game board into multiples of SQUARE_SIZE.
     min_x=-int(SIZE_X/2/SQUARE_SIZE)+1
     max_x=int(SIZE_X/2/SQUARE_SIZE)-1
-    min_y=-int(SIZE_Y/2/SQUARE_SIZE)-1
-    max_y=int(SIZE_Y/2/SQUARE_SIZE)+1
+    min_y=-int(SIZE_Y/2/SQUARE_SIZE)+1
+    max_y=int(SIZE_Y/2/SQUARE_SIZE)-1
     
     #Pick a position that is a random multiple of SQUARE_SIZE
     #food_x = random.randint(min_X,max_X)*SQUARE_SIZE
@@ -120,7 +123,7 @@ def make_food():
     food_stamps.append(foodID)
     ##2.WRITE YOUR CODE HERE: Add the food turtle's position to the food positions list
     ##3.WRITE YOUR CODE HERE: Add the food turtle's stamp to the food stamps list
-
+score = 0
 
 def move_snake():
     global direction
@@ -140,8 +143,10 @@ def move_snake():
         snake.goto(x_pos, y_pos - SQUARE_SIZE)
         print('You moved down!')
     if snake.pos() in pos_list[0:-1]:
+        
+        print("game over! you'r score is" + str(score) +'!')
+        time.sleep(10)
         quit()
-
 #4. Write the conditions for UP and DOWN on your own
 ##### YOUR CODE HERE
 #Stamp new element and append new stamp in list
@@ -160,6 +165,8 @@ def move_snake():
         food_pos.pop(food_ind) #Remove eaten food position
         food_stamps.pop(food_ind) #Remove eaten food stamp
         print('You have eaten the food!')
+        global score
+        score=score+1
         make_food()
     #HINT: This if statement may be useful for Part 8
 
@@ -186,17 +193,28 @@ def move_snake():
 # right edge.
     if new_x_pos >= RIGHT_EDGE:
         print('You hit the right edge! Game over!')
+        time.sleep(10)
         quit()
 # You should write code to check for the left, top, and bottom edges.
 #####WRITE YOUR CODE HERE
     if new_x_pos <= LEFT_EDGE:
         print('You hit the left edge! Game over!')
+        
+        print("you'r score is" + str(score))
+        time.sleep(10)
+        
         quit()
     if new_y_pos <= DOWN_EDGE:
         print('You hit the bottom edge! Game over!')
+        
+        print("you'r score is" + str(score))
+        time.sleep(10)
         quit()
     if new_y_pos >= UP_EDGE:
         print('You hit the top edge! Game over!')
+        
+        print("you'r score is" +' '+ str(score))
+        time.sleep(10)
         quit()
     turtle.ontimer(move_snake,TIME_STEP)
 move_snake()
@@ -222,7 +240,6 @@ for this_food_pos in food_pos :
     food.goto(this_food_pos)
     food_ID = food.stamp()
     food_stamps.append(food_ID)
-   
 
 
 
